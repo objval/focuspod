@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import {
   Check,
   Zap,
@@ -15,6 +15,97 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+// Floating Particles Component
+const FloatingParticles = React.memo(function FloatingParticles() {
+  const particles = React.useMemo(() => 
+    Array.from({ length: 18 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 4 + 2,
+      initialX: Math.random() * 100,
+      initialY: Math.random() * 100,
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 5,
+    })),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute rounded-full bg-primary/20"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            left: `${particle.initialX}%`,
+            top: `${particle.initialY}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+});
+
+// Reactive Orb Component
+function ReactiveOrb({ 
+  mouseX, 
+  mouseY, 
+  className, 
+  size, 
+  offsetX, 
+  offsetY,
+  intensity = 0.02 
+}: { 
+  mouseX: ReturnType<typeof useMotionValue<number>>;
+  mouseY: ReturnType<typeof useMotionValue<number>>;
+  className: string;
+  size: string;
+  offsetX: string;
+  offsetY: string;
+  intensity?: number;
+}) {
+  const springConfig = { damping: 30, stiffness: 100 };
+  const x = useSpring(useMotionValue(0), springConfig);
+  const y = useSpring(useMotionValue(0), springConfig);
+
+  React.useEffect(() => {
+    const unsubX = mouseX.on("change", (latest) => {
+      x.set(latest * intensity);
+    });
+    const unsubY = mouseY.on("change", (latest) => {
+      y.set(latest * intensity);
+    });
+    return () => {
+      unsubX();
+      unsubY();
+    };
+  }, [mouseX, mouseY, x, y, intensity]);
+
+  return (
+    <motion.div
+      className={`absolute ${size} ${className} rounded-full blur-3xl pointer-events-none`}
+      style={{
+        left: offsetX,
+        top: offsetY,
+        x,
+        y,
+      }}
+    />
+  );
+}
+
 const specs = [
   { icon: Usb, label: "Enchufe USB-C & USB-A" },
   { icon: MonitorDot, label: "Escritorio Ergonómico" },
@@ -24,6 +115,19 @@ const specs = [
 
 export function Pricing() {
   const [availablePods, setAvailablePods] = React.useState(7);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = React.useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
+    },
+    [mouseX, mouseY]
+  );
 
   // Simular cambios en disponibilidad (en producción sería un API real)
   React.useEffect(() => {
@@ -39,10 +143,36 @@ export function Pricing() {
   }, []);
 
   return (
-    <section id="precios" className="relative py-24 sm:py-32 overflow-hidden">
+    <section 
+      id="precios" 
+      className="relative py-24 sm:py-32 overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Floating Particles */}
+      <FloatingParticles />
+
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-muted/30 to-muted/20" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      
+      {/* Reactive Orbs */}
+      <ReactiveOrb
+        mouseX={mouseX}
+        mouseY={mouseY}
+        className="bg-primary/10"
+        size="w-[600px] h-[600px]"
+        offsetX="30%"
+        offsetY="20%"
+        intensity={0.025}
+      />
+      <ReactiveOrb
+        mouseX={mouseX}
+        mouseY={mouseY}
+        className="bg-secondary/15"
+        size="w-80 h-80"
+        offsetX="70%"
+        offsetY="60%"
+        intensity={0.03}
+      />
       
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -74,16 +204,17 @@ export function Pricing() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-lg mx-auto"
         >
-          <Card className="relative overflow-hidden border-primary/50 shadow-xl shadow-primary/10">
+          <Card className="group relative overflow-hidden border-primary/50 bg-card/80 backdrop-blur-xl shadow-xl shadow-primary/10 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500">
             {/* Popular Badge */}
-            <div className="absolute top-0 right-0">
+            <div className="absolute top-0 right-0 z-10">
               <div className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1 rounded-bl-lg">
                 MÁS POPULAR
               </div>
             </div>
 
-            {/* Glow Effect */}
-            <div className="absolute -inset-px bg-gradient-to-r from-primary/50 via-transparent to-primary/50 opacity-20 blur-xl" />
+            {/* Enhanced Glow Effect */}
+            <div className="absolute -inset-px bg-gradient-to-r from-primary/50 via-transparent to-primary/50 opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
 
             <CardHeader className="relative text-center pt-8 pb-4">
               <div className="inline-flex items-center gap-2 text-primary font-medium mb-2">

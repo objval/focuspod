@@ -1,11 +1,103 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Clock } from "lucide-react";
+import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
+import { ArrowRight, Clock, BookOpen } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+// Floating Particles Component
+const FloatingParticles = React.memo(function FloatingParticles() {
+  const particles = React.useMemo(() => 
+    Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 4 + 2,
+      initialX: Math.random() * 100,
+      initialY: Math.random() * 100,
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 5,
+    })),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute rounded-full bg-primary/20"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            left: `${particle.initialX}%`,
+            top: `${particle.initialY}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+});
+
+// Reactive Orb Component
+function ReactiveOrb({ 
+  mouseX, 
+  mouseY, 
+  className, 
+  size, 
+  offsetX, 
+  offsetY,
+  intensity = 0.02 
+}: { 
+  mouseX: ReturnType<typeof useMotionValue<number>>;
+  mouseY: ReturnType<typeof useMotionValue<number>>;
+  className: string;
+  size: string;
+  offsetX: string;
+  offsetY: string;
+  intensity?: number;
+}) {
+  const springConfig = { damping: 30, stiffness: 100 };
+  const x = useSpring(useMotionValue(0), springConfig);
+  const y = useSpring(useMotionValue(0), springConfig);
+
+  React.useEffect(() => {
+    const unsubX = mouseX.on("change", (latest) => {
+      x.set(latest * intensity);
+    });
+    const unsubY = mouseY.on("change", (latest) => {
+      y.set(latest * intensity);
+    });
+    return () => {
+      unsubX();
+      unsubY();
+    };
+  }, [mouseX, mouseY, x, y, intensity]);
+
+  return (
+    <motion.div
+      className={`absolute ${size} ${className} rounded-full blur-3xl pointer-events-none`}
+      style={{
+        left: offsetX,
+        top: offsetY,
+        x,
+        y,
+      }}
+    />
+  );
+}
 
 const articles = [
   {
@@ -27,6 +119,16 @@ const articles = [
       "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop",
     category: "Consejos",
     readTime: "7 min",
+  },
+  {
+    id: 3,
+    title: "Guía completa: Crear tu rutina de estudio perfecta",
+    excerpt:
+      "Descubre cómo estructurar tus sesiones de estudio para maximizar la retención y minimizar el agotamiento mental.",
+    image:
+      "https://images.unsplash.com/photo-1513128034602-7814ccadence?q=80&w=2070&auto=format&fit=crop",
+    category: "Guías",
+    readTime: "8 min",
   },
 ];
 
@@ -53,12 +155,51 @@ const itemVariants: Variants = {
 };
 
 export function BlogPreview() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = React.useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
+    },
+    [mouseX, mouseY]
+  );
+
   return (
-    <section id="blog" className="relative py-24 sm:py-32 overflow-hidden">
+    <section 
+      id="blog" 
+      className="relative py-24 sm:py-32 overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Floating Particles */}
+      <FloatingParticles />
+
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
-      <div className="absolute top-20 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
+      
+      {/* Reactive Orbs */}
+      <ReactiveOrb
+        mouseX={mouseX}
+        mouseY={mouseY}
+        className="bg-primary/10"
+        size="w-72 h-72"
+        offsetX="85%"
+        offsetY="10%"
+        intensity={0.025}
+      />
+      <ReactiveOrb
+        mouseX={mouseX}
+        mouseY={mouseY}
+        className="bg-secondary/15"
+        size="w-64 h-64"
+        offsetX="-5%"
+        offsetY="70%"
+        intensity={0.03}
+      />
       
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -93,11 +234,14 @@ export function BlogPreview() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {articles.map((article) => (
             <motion.article key={article.id} variants={itemVariants}>
-              <Card className="group h-full overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+              <Card className="group h-full overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 relative">
+                {/* Card glow overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none z-10" />
+                
                 {/* Image */}
                 <div className="relative aspect-video overflow-hidden">
                   <Image
@@ -115,7 +259,7 @@ export function BlogPreview() {
                   </Badge>
                 </div>
 
-                <CardContent className="p-6">
+                <CardContent className="relative p-6">
                   {/* Meta */}
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                     <Clock className="h-4 w-4" />
@@ -145,6 +289,22 @@ export function BlogPreview() {
               </Card>
             </motion.article>
           ))}
+        </motion.div>
+
+        {/* Newsletter/Subscribe Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+            <BookOpen className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">
+              Nuevos artículos cada semana
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

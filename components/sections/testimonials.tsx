@@ -1,11 +1,103 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import * as React from "react";
+import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
+// Floating Particles Component
+const FloatingParticles = React.memo(function FloatingParticles() {
+  const particles = React.useMemo(() => 
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 4 + 2,
+      initialX: Math.random() * 100,
+      initialY: Math.random() * 100,
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 5,
+    })),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute rounded-full bg-primary/20"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            left: `${particle.initialX}%`,
+            top: `${particle.initialY}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+});
+
+// Reactive Orb Component
+function ReactiveOrb({ 
+  mouseX, 
+  mouseY, 
+  className, 
+  size, 
+  offsetX, 
+  offsetY,
+  intensity = 0.02 
+}: { 
+  mouseX: ReturnType<typeof useMotionValue<number>>;
+  mouseY: ReturnType<typeof useMotionValue<number>>;
+  className: string;
+  size: string;
+  offsetX: string;
+  offsetY: string;
+  intensity?: number;
+}) {
+  const springConfig = { damping: 30, stiffness: 100 };
+  const x = useSpring(useMotionValue(0), springConfig);
+  const y = useSpring(useMotionValue(0), springConfig);
+
+  React.useEffect(() => {
+    const unsubX = mouseX.on("change", (latest) => {
+      x.set(latest * intensity);
+    });
+    const unsubY = mouseY.on("change", (latest) => {
+      y.set(latest * intensity);
+    });
+    return () => {
+      unsubX();
+      unsubY();
+    };
+  }, [mouseX, mouseY, x, y, intensity]);
+
+  return (
+    <motion.div
+      className={`absolute ${size} ${className} rounded-full blur-3xl pointer-events-none`}
+      style={{
+        left: offsetX,
+        top: offsetY,
+        x,
+        y,
+      }}
+    />
+  );
+}
 
 const testimonials = [
   {
@@ -69,12 +161,51 @@ const cardVariants: Variants = {
 };
 
 export function Testimonials() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = React.useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
+    },
+    [mouseX, mouseY]
+  );
+
   return (
-    <section id="testimonios" className="relative py-24 sm:py-32 overflow-hidden">
+    <section 
+      id="testimonios" 
+      className="relative py-24 sm:py-32 overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Floating Particles */}
+      <FloatingParticles />
+
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/20" />
-      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 left-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
+      
+      {/* Reactive Orbs */}
+      <ReactiveOrb
+        mouseX={mouseX}
+        mouseY={mouseY}
+        className="bg-primary/10"
+        size="w-[500px] h-[500px]"
+        offsetX="60%"
+        offsetY="15%"
+        intensity={0.03}
+      />
+      <ReactiveOrb
+        mouseX={mouseX}
+        mouseY={mouseY}
+        className="bg-secondary/15"
+        size="w-72 h-72"
+        offsetX="-5%"
+        offsetY="60%"
+        intensity={0.025}
+      />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -106,10 +237,13 @@ export function Testimonials() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {testimonials.map((testimonial) => (
+          {testimonials.map((testimonial, index) => (
             <motion.div key={testimonial.id} variants={cardVariants}>
-              <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
-                <CardContent className="p-6">
+              <Card className="group h-full border-border/50 bg-card/60 backdrop-blur-sm hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 relative overflow-hidden">
+                {/* Card glow overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+                
+                <CardContent className="relative p-6">
                   {/* Quote Icon */}
                   <Quote className="h-8 w-8 text-primary/20 mb-4" />
 

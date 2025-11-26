@@ -21,19 +21,19 @@ import { cn } from "@/lib/utils";
 
 // Define the sections to scroll through
 const sections = [
-  { id: "inicio", label: "Hero", duration: 6000 },
-  { id: "beneficios", label: "Beneficios", duration: 5000 },
-  { id: "precios", label: "Precios", duration: 5000 },
-  { id: "testimonios", label: "Testimonios", duration: 5000 },
-  { id: "blog", label: "Blog", duration: 4000 },
-  { id: "nosotros", label: "Nosotros", duration: 5000 },
-  { id: "ubicacion", label: "Ubicación", duration: 5000 },
-  { id: "faq", label: "FAQ", duration: 5000 },
-  { id: "cta", label: "CTA Final", duration: 5000 },
+  { id: "inicio", label: "Hero", duration: 8000 },
+  { id: "beneficios", label: "Beneficios", duration: 7000 },
+  { id: "precios", label: "Precios", duration: 7000 },
+  { id: "testimonios", label: "Testimonios", duration: 7000 },
+  { id: "blog", label: "Blog", duration: 6000 },
+  { id: "nosotros", label: "Nosotros", duration: 7000 },
+  { id: "ubicacion", label: "Ubicación", duration: 7000 },
+  { id: "faq", label: "FAQ", duration: 7000 },
+  { id: "cta", label: "CTA Final", duration: 7000 },
 ];
 
-// Royalty-free ambient music URL (lofi/chill)
-const AMBIENT_MUSIC_URL = "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3";
+// Royalty-free zen/meditation music URL (calm, ADHD-friendly)
+const AMBIENT_MUSIC_URL = "https://cdn.pixabay.com/audio/2022/03/10/audio_d65d6a5a0e.mp3";
 
 export function ShowcaseMode() {
   const [isActive, setIsActive] = React.useState(false);

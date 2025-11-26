@@ -134,11 +134,11 @@ function FAQAccordionItem({
           isOpen && "border-primary/30 bg-card/80"
         )}
       >
-        <AccordionTrigger className="text-left font-medium hover:text-primary transition-colors py-5 group">
+        <AccordionTrigger className="text-left text-lg font-medium hover:text-primary transition-colors py-5 group">
           <span className="flex items-center gap-3">
             <span
               className={cn(
-                "flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold transition-colors",
+                "flex items-center justify-center w-9 h-9 rounded-lg text-base font-bold transition-colors",
                 isOpen ? "bg-primary/20 text-primary" : "bg-primary/10 text-primary"
               )}
             >
@@ -147,7 +147,7 @@ function FAQAccordionItem({
             {faq.question}
           </span>
         </AccordionTrigger>
-        <AccordionContent className="text-muted-foreground pb-5 pl-11">
+        <AccordionContent className="text-base text-muted-foreground pb-5 pl-12">
           {faq.answer}
         </AccordionContent>
       </AccordionItem>
