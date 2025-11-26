@@ -106,29 +106,31 @@ export function HeroCarousel() {
 
                 {/* Content */}
                 <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-                  <div className="max-w-2xl pt-20">
-                    <AnimatePresence mode="wait">
-                      {current === index && (
-                        <motion.div
-                          key={slide.id}
-                          initial={{ opacity: 0, y: 30 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -30 }}
-                          transition={{ duration: 0.5, ease: "easeOut" }}
-                        >
-                          {/* Badge */}
+                  <div className="flex items-center justify-between w-full pt-20 gap-8">
+                    {/* Text Content */}
+                    <div className="max-w-2xl">
+                      <AnimatePresence mode="wait">
+                        {current === index && (
                           <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.1, duration: 0.4 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
+                            key={slide.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
                           >
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                            </span>
-                            Cápsulas disponibles en Temuco
-                          </motion.div>
+                            {/* Badge */}
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.1, duration: 0.4 }}
+                              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
+                            >
+                              <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                              </span>
+                              Cápsulas disponibles en Temuco
+                            </motion.div>
 
                           {/* Title */}
                           <motion.h1
@@ -176,7 +178,42 @@ export function HeroCarousel() {
                         </motion.div>
                       )}
                     </AnimatePresence>
+                    </div>
+
+                    {/* Large Logo on Right - Desktop */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, x: 50 }}
+                      animate={{ opacity: current === index ? 1 : 0, scale: current === index ? 1 : 0.8, x: current === index ? 0 : 50 }}
+                      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                      className="hidden lg:flex items-center justify-center flex-shrink-0"
+                    >
+                      <Image
+                        src="/icon.svg"
+                        alt="FocusPod"
+                        width={400}
+                        height={400}
+                        className="drop-shadow-2xl"
+                        priority
+                      />
+                    </motion.div>
                   </div>
+
+                  {/* Logo on Mobile - Bottom Right Corner */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: current === index ? 0.15 : 0, scale: current === index ? 1 : 0.5 }}
+                    transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                    className="absolute bottom-24 right-4 sm:bottom-28 sm:right-8 lg:hidden pointer-events-none"
+                  >
+                    <Image
+                      src="/icon.svg"
+                      alt="FocusPod"
+                      width={200}
+                      height={200}
+                      className="drop-shadow-2xl"
+                      priority
+                    />
+                  </motion.div>
                 </div>
               </div>
             </CarouselItem>

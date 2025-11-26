@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
-  Headphones,
   Home,
   Sparkles,
   CreditCard,
@@ -108,10 +108,15 @@ export function Navbar() {
             className="flex items-center gap-3 group"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-primary/30 rounded-xl blur-lg group-hover:bg-primary/50 transition-all duration-300" />
-              <div className="relative bg-gradient-to-br from-primary to-primary/70 p-2.5 rounded-xl shadow-lg transition-all duration-300 group-hover:scale-105 group-active:scale-95">
-                <Headphones className="h-6 w-6 text-primary-foreground" />
-              </div>
+              <div className="absolute inset-0 bg-primary/20 rounded-xl blur-xl group-hover:bg-primary/40 transition-all duration-300" />
+              <Image
+                src="/icon.svg"
+                alt="FocusPod Logo"
+                width={44}
+                height={44}
+                className="relative transition-transform duration-300 group-hover:scale-110 group-active:scale-95"
+                priority
+              />
             </div>
             <div className="hidden sm:block">
               <span className="text-xl font-black tracking-tight">

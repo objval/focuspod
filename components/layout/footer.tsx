@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Headphones,
   MapPin,
   Mail,
   Phone,
@@ -33,7 +33,13 @@ export function Footer() {
             className="lg:col-span-1"
           >
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Headphones className="h-8 w-8 text-primary" />
+              <Image
+                src="/icon.svg"
+                alt="FocusPod"
+                width={32}
+                height={32}
+                className="text-primary"
+              />
               <span className="text-xl font-bold">
                 Focus<span className="text-primary">Pod</span>
               </span>

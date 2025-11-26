@@ -151,7 +151,7 @@ npm run lint     # Linter
 Barra de navegación flotante fija en la parte superior.
 
 **Contenido:**
-- **Logo:** Icono de audífonos (`Headphones`) + texto "FocusPod" (donde "Spot" está en color primario)
+- **Logo:** Icono SVG personalizado (`/icon.svg`) + texto "FocusPod" (donde "Pod" está en color primario)
 - **Links de navegación:** Inicio, Beneficios, Precios, Blog, Nosotros
 - **Theme Switcher:** Botón para cambiar entre modo oscuro/claro (iconos `Sun`/`Moon`)
 - **CTA:** Botón "Reservar Ahora"
