@@ -17,17 +17,31 @@ import { Badge } from "@/components/ui/badge";
 
 // Floating Particles Component
 const FloatingParticles = React.memo(function FloatingParticles() {
-  const particles = React.useMemo(() => 
-    Array.from({ length: 18 }, (_, i) => ({
-      id: i,
-      size: Math.random() * 4 + 2,
-      initialX: Math.random() * 100,
-      initialY: Math.random() * 100,
-      duration: Math.random() * 20 + 15,
-      delay: Math.random() * 5,
-    })),
-    []
-  );
+  const [particles, setParticles] = React.useState<Array<{
+    id: number;
+    size: number;
+    initialX: number;
+    initialY: number;
+    duration: number;
+    delay: number;
+    xOffset: number;
+  }>>([]);
+
+  React.useEffect(() => {
+    setParticles(
+      Array.from({ length: 18 }, (_, i) => ({
+        id: i,
+        size: Math.random() * 4 + 2,
+        initialX: Math.random() * 100,
+        initialY: Math.random() * 100,
+        duration: Math.random() * 20 + 15,
+        delay: Math.random() * 5,
+        xOffset: Math.random() * 20 - 10,
+      }))
+    );
+  }, []);
+
+  if (particles.length === 0) return null;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -43,7 +57,7 @@ const FloatingParticles = React.memo(function FloatingParticles() {
           }}
           animate={{
             y: [0, -30, 0],
-            x: [0, Math.random() * 20 - 10, 0],
+            x: [0, particle.xOffset, 0],
             opacity: [0.2, 0.5, 0.2],
           }}
           transition={{

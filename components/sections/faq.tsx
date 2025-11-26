@@ -15,15 +15,33 @@ import { cn } from "@/lib/utils";
 
 // Floating particles component
 function FloatingParticles() {
-  const particles = Array.from({ length: 25 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 5 + 2,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 12 + 8,
-    delay: Math.random() * 5,
-    type: Math.random() > 0.7 ? "glow" : "normal",
-  }));
+  const [particles, setParticles] = React.useState<Array<{
+    id: number;
+    size: number;
+    x: number;
+    y: number;
+    duration: number;
+    delay: number;
+    type: string;
+    xOffset: number;
+  }>>([]);
+
+  React.useEffect(() => {
+    setParticles(
+      Array.from({ length: 25 }, (_, i) => ({
+        id: i,
+        size: Math.random() * 5 + 2,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        duration: Math.random() * 12 + 8,
+        delay: Math.random() * 5,
+        type: Math.random() > 0.7 ? "glow" : "normal",
+        xOffset: Math.random() * 15 - 7.5,
+      }))
+    );
+  }, []);
+
+  if (particles.length === 0) return null;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -44,7 +62,7 @@ function FloatingParticles() {
           }}
           animate={{
             y: [0, -30, 0],
-            x: [0, Math.random() * 15 - 7.5, 0],
+            x: [0, particle.xOffset, 0],
             opacity: [0.2, 0.8, 0.2],
             scale: [1, 1.2, 1],
           }}

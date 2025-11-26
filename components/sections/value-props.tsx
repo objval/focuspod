@@ -10,18 +10,31 @@ import { cn } from "@/lib/utils";
 
 // Floating particles component
 function FloatingParticles() {
-  const particles = React.useMemo(() => 
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      size: Math.random() * 4 + 2,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      duration: Math.random() * 12 + 8,
-      delay: Math.random() * 5,
-      type: Math.random() > 0.7 ? "glow" : "normal",
-    })),
-    []
-  );
+  const [particles, setParticles] = React.useState<Array<{
+    id: number;
+    size: number;
+    x: number;
+    y: number;
+    duration: number;
+    delay: number;
+    type: string;
+  }>>([]);
+
+  React.useEffect(() => {
+    setParticles(
+      Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        size: Math.random() * 4 + 2,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        duration: Math.random() * 12 + 8,
+        delay: Math.random() * 5,
+        type: Math.random() > 0.7 ? "glow" : "normal",
+      }))
+    );
+  }, []);
+
+  if (particles.length === 0) return null;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
