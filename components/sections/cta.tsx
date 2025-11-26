@@ -9,7 +9,7 @@ export function CallToAction() {
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-muted/20 to-muted/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-muted/30 to-muted/30" />
       
       {/* Single decorative orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />

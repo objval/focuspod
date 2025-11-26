@@ -20,8 +20,9 @@ const navLinks = [
   { href: "#inicio", label: "Inicio" },
   { href: "#beneficios", label: "Beneficios" },
   { href: "#precios", label: "Precios" },
-  { href: "#blog", label: "Blog" },
-  { href: "#nosotros", label: "Nosotros" },
+  { href: "#testimonios", label: "Testimonios" },
+  { href: "#ubicacion", label: "Ubicación" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function Navbar() {

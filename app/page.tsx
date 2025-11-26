@@ -3,8 +3,11 @@ import {
   HeroCarousel,
   ValueProps,
   Pricing,
+  Testimonials,
   BlogPreview,
   AboutUs,
+  Location,
+  FAQ,
   CallToAction,
   Footer,
 } from "@/components/sections";
@@ -17,8 +20,11 @@ export default function Home() {
         <HeroCarousel />
         <ValueProps />
         <Pricing />
+        <Testimonials />
         <BlogPreview />
         <AboutUs />
+        <Location />
+        <FAQ />
         <CallToAction />
       </main>
       <Footer />

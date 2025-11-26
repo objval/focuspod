@@ -54,8 +54,11 @@ studyspot/
 │   │   ├── hero-carousel.tsx
 │   │   ├── value-props.tsx
 │   │   ├── pricing.tsx
+│   │   ├── testimonials.tsx   # ✨ NUEVO
 │   │   ├── blog-preview.tsx
 │   │   ├── about-us.tsx
+│   │   ├── location.tsx       # ✨ NUEVO (Google Maps)
+│   │   ├── faq.tsx            # ✨ NUEVO
 │   │   ├── cta.tsx
 │   │   ├── footer.tsx
 │   │   └── index.ts     # Barrel exports
@@ -79,6 +82,9 @@ studyspot/
 - **Pricing** - Tarjeta "Pase Deep Focus" con indicador de escasez animado
 - **Blog Preview** - 2 artículos con imágenes y metadata
 - **About Us** - Storytelling con quote y floating card
+- **Testimonials** ✨ - 4 reseñas reales con rating y destacados
+- **Location** ✨ - Google Maps embed, horarios, lugares cercanos
+- **FAQ** ✨ - 6 preguntas frecuentes con acordeón animado
 - **CTA Final** - Trust indicators y social proof
 - **Footer** - Contacto, redes sociales, navegación
 
