@@ -1,6 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import { ScrollToTop } from "@/components/layout/scroll-to-top";
+import { AccessibilityWidget } from "@/components/layout/accessibility-widget";
+import { QuickContact } from "@/components/layout/quick-contact";
+import { CookieConsent } from "@/components/layout/cookie-consent";
+import { ShowcaseMode } from "@/components/showcase-mode";
 import "./globals.css";
 
 const inter = Inter({
@@ -457,10 +464,19 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
-          {children}
+          <div className="relative min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ScrollToTop />
+            <AccessibilityWidget />
+            <QuickContact />
+            <ShowcaseMode />
+            <CookieConsent />
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -1,12 +1,9 @@
 import dynamic from "next/dynamic";
 import {
-  Navbar,
   HeroCarousel,
   ValueProps,
   Pricing,
-  Footer,
 } from "@/components/sections";
-import { ShowcaseMode } from "@/components/showcase-mode";
 
 // Lazy load secciones below-the-fold para mejor performance inicial
 const Testimonials = dynamic(
@@ -37,20 +34,15 @@ const CallToAction = dynamic(
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main>
-        <HeroCarousel />
-        <ValueProps />
-        <Pricing />
-        <Testimonials />
-        <BlogPreview />
-        <AboutUs />
-        <Location />
-        <FAQ />
-        <CallToAction />
-      </main>
-      <Footer />
-      <ShowcaseMode />
+      <HeroCarousel />
+      <ValueProps />
+      <Pricing />
+      <Testimonials />
+      <BlogPreview />
+      <AboutUs />
+      <Location />
+      <FAQ />
+      <CallToAction />
     </>
   );
 }

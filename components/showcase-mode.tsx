@@ -198,15 +198,16 @@ export function ShowcaseMode() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-6 right-6 z-50"
+            className="fixed bottom-6 left-6 z-40"
           >
             <Button
               onClick={startShowcase}
-              size="lg"
-              className="gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
+              size="sm"
+              className="gap-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 hover:scale-105"
             >
-              <Presentation className="h-5 w-5" />
-              Modo Presentación
+              <Presentation className="h-4 w-4" />
+              <span className="hidden sm:inline">Modo Presentación</span>
+              <span className="sm:hidden">Demo</span>
             </Button>
           </motion.div>
         )}

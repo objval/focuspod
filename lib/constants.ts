@@ -16,14 +16,14 @@ export const SITE_CONFIG = {
   instagram: "@studyspot.temuco",
 } as const;
 
-// Links de navegación
+// Links de navegación con iconos
 export const NAV_LINKS = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#beneficios", label: "Beneficios" },
-  { href: "#precios", label: "Precios" },
-  { href: "#testimonios", label: "Testimonios" },
-  { href: "#ubicacion", label: "Ubicación" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#inicio", label: "Inicio", icon: "Home" },
+  { href: "#beneficios", label: "Beneficios", icon: "Sparkles" },
+  { href: "#precios", label: "Precios", icon: "CreditCard" },
+  { href: "#testimonios", label: "Testimonios", icon: "MessageSquare" },
+  { href: "#ubicacion", label: "Ubicación", icon: "MapPin" },
+  { href: "#faq", label: "FAQ", icon: "HelpCircle" },
 ] as const;
 
 // Links del footer

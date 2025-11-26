@@ -150,10 +150,22 @@ export function AboutUs() {
                   propia capacidad.&quot;
                 </p>
                 <footer className="mt-2 text-sm text-muted-foreground">
-                  — Equipo Fundador, StudySpot
+                  — Nicolas Vergara, Nicolas Escobar, Francisca Fuentes, Nicolas Barros & Benjamin Sanchez
                 </footer>
               </div>
             </motion.blockquote>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              className="mt-6 p-4 rounded-xl bg-muted/30 border border-border/50"
+            >
+              <p className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">Somos estudiantes de Temuco</span> que entendemos la frustración de no encontrar un lugar tranquilo para estudiar. No somos una inmobiliaria, somos tu santuario de concentración en medio del caos universitario.
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </div>
