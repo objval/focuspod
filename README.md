@@ -139,35 +139,6 @@ npm run lint     # Linter
 
 ---
 
-## 🎯 Prompts para Assets
-
-### Logo (PNG Transparente)
-
-```
-Minimalist logo icon for 'StudySpot', a study pod rental service. 
-Simple geometric icon combining noise-canceling headphones with a 
-subtle location pin shape using negative space.
-
-Style: Modern, geometric, flat design, clean vector-style, soft rounded edges.
-
-Colors:
-- Primary icon color: Warm amber/gold (#E8C872) with subtle gradient to (#D4A84B)
-- Secondary details: Soft cream white (#F5F0E6) for highlights
-- NO background - transparent PNG
-
-Design requirements:
-- Single cohesive icon mark, no text
-- Works at small sizes (favicon, app icon)
-- Clean silhouette, recognizable shape
-
-Render: High resolution, crisp edges, transparent background, 
-centered composition, square aspect ratio.
-
---v 6.0 --style raw
-```
-
----
-
 ## 📄 Secciones de la Página (Detalle Completo)
 
 ### 1. 🧭 Navbar (`navbar.tsx`)
