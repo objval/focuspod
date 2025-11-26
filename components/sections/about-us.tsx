@@ -2,17 +2,40 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Quote, Heart } from "lucide-react";
+import { Quote, Heart, Users } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
 
 export function AboutUs() {
   return (
-    <section id="nosotros" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="nosotros" className="relative min-h-screen py-24 sm:py-32 overflow-hidden flex items-center">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-muted/30" />
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/3 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
       
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <Badge variant="secondary" className="mb-4">
+            <Users className="h-3 w-3 mr-1" />
+            Quiénes Somos
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            Conoce al equipo detrás de{" "}
+            <span className="text-primary">StudySpot</span>
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Estudiantes que entendieron el problema y crearon la solución.
+          </p>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image Side */}
           <motion.div
@@ -67,10 +90,10 @@ export function AboutUs() {
               Nuestra Historia
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
               No somos una inmobiliaria,{" "}
               <span className="text-primary">somos tu santuario</span>
-            </h2>
+            </h3>
 
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>

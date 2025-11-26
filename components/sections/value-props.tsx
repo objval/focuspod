@@ -57,7 +57,7 @@ const itemVariants: Variants = {
 
 export function ValueProps() {
   return (
-    <section id="beneficios" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="beneficios" className="relative min-h-screen py-24 sm:py-32 overflow-hidden flex items-center">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20" />
       <div className="absolute top-1/3 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />

@@ -11,6 +11,7 @@ import {
   CallToAction,
   Footer,
 } from "@/components/sections";
+import { ShowcaseMode } from "@/components/showcase-mode";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <CallToAction />
       </main>
       <Footer />
+      <ShowcaseMode />
     </>
   );
 }
