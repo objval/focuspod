@@ -350,31 +350,31 @@ const jsonLd = {
             name: "Sebastián R.",
           },
           reviewBody:
-            "Mi tesis avanzó más en una semana usando StudySpot que en un mes estudiando en mi casa.",
+            "Mi tesis avanzó más en una semana usando FocusPod que en un mes estudiando en mi casa.",
         },
       ],
     },
     {
       "@type": "WebSite",
-      "@id": "https://studyspot.cl/#website",
-      url: "https://studyspot.cl",
-      name: "StudySpot",
+      "@id": "https://focuspod.cl/#website",
+      url: "https://focuspod.cl",
+      name: "FocusPod",
       description: "Cápsulas de estudio insonorizadas en Temuco",
       publisher: {
-        "@id": "https://studyspot.cl/#organization",
+        "@id": "https://focuspod.cl/#organization",
       },
       inLanguage: "es-CL",
     },
     {
       "@type": "WebPage",
-      "@id": "https://studyspot.cl/#webpage",
-      url: "https://studyspot.cl",
-      name: "StudySpot | Cápsulas de Estudio Insonorizadas en Temuco",
+      "@id": "https://focuspod.cl/#webpage",
+      url: "https://focuspod.cl",
+      name: "FocusPod | Cápsulas de Estudio Insonorizadas en Temuco",
       isPartOf: {
-        "@id": "https://studyspot.cl/#website",
+        "@id": "https://focuspod.cl/#website",
       },
       about: {
-        "@id": "https://studyspot.cl/#localbusiness",
+        "@id": "https://focuspod.cl/#localbusiness",
       },
       description:
         "Tu santuario de concentración en Temuco. Cápsulas de estudio 100% insonorizadas con WiFi 5G dedicado.",
@@ -382,7 +382,7 @@ const jsonLd = {
     },
     {
       "@type": "FAQPage",
-      "@id": "https://studyspot.cl/#faq",
+      "@id": "https://focuspod.cl/#faq",
       mainEntity: [
         {
           "@type": "Question",
@@ -428,13 +428,13 @@ const jsonLd = {
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://studyspot.cl/#breadcrumb",
+      "@id": "https://focuspod.cl/#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
           position: 1,
           name: "Inicio",
-          item: "https://studyspot.cl",
+          item: "https://focuspod.cl",
         },
       ],
     },

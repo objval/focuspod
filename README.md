@@ -1,8 +1,8 @@
-# 🎧 StudySpot
+# 🎧 FocusPod
 
 > **Tu santuario de concentración en Temuco**
 
-Landing page moderna para StudySpot, un servicio de cápsulas de estudio insonorizadas diseñadas para estudiantes universitarios en Temuco, Chile.
+Landing page moderna para FocusPod, un servicio de cápsulas de estudio insonorizadas diseñadas para estudiantes universitarios en Temuco, Chile.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
@@ -43,7 +43,7 @@ El diseño utiliza un tema **"Soft Dark"** con tonos cálidos y acogedores:
 ## 🏗️ Estructura del Proyecto
 
 ```
-studyspot/
+focuspod/
 ├── app/
 │   ├── globals.css      # Variables CSS y tema
 │   ├── layout.tsx       # Layout principal con ThemeProvider
@@ -117,8 +117,8 @@ studyspot/
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/objval/studyspot.git
-cd studyspot
+git clone https://github.com/objval/focuspod.git
+cd focuspod
 
 # Instalar dependencias
 npm install
@@ -151,7 +151,7 @@ npm run lint     # Linter
 Barra de navegación flotante fija en la parte superior.
 
 **Contenido:**
-- **Logo:** Icono de audífonos (`Headphones`) + texto "StudySpot" (donde "Spot" está en color primario)
+- **Logo:** Icono de audífonos (`Headphones`) + texto "FocusPod" (donde "Spot" está en color primario)
 - **Links de navegación:** Inicio, Beneficios, Precios, Blog, Nosotros
 - **Theme Switcher:** Botón para cambiar entre modo oscuro/claro (iconos `Sun`/`Moon`)
 - **CTA:** Botón "Reservar Ahora"
@@ -183,9 +183,9 @@ Sección principal con carrusel de 3 slides a pantalla completa.
 ---
 
 ### 3. 💎 Value Props (`value-props.tsx`)
-Sección "¿Por qué elegir StudySpot?" con 3 tarjetas de beneficios.
+Sección "¿Por qué elegir FocusPod?" con 3 tarjetas de beneficios.
 
-**Título:** "¿Por qué elegir StudySpot?"
+**Título:** "¿Por qué elegir FocusPod?"
 **Subtítulo:** "Diseñamos cada detalle pensando en tu concentración y comodidad."
 
 **Tarjetas:**
@@ -226,7 +226,7 @@ Sección de precios con producto estrella.
 ### 5. 📝 Blog Preview (`blog-preview.tsx`)
 Sección de preview del blog corporativo.
 
-**Título:** "Blog StudySpot"
+**Título:** "Blog FocusPod"
 **Subtítulo:** "Tips, guías y recursos para potenciar tu estudio."
 **Link:** "Ver todos los artículos" →
 
@@ -248,9 +248,9 @@ Sección "Quiénes Somos" con storytelling emotivo.
 **Historia (3 párrafos):**
 1. "Nacimos de una frustración compartida: la imposibilidad de encontrar un espacio verdaderamente silencioso para estudiar en Temuco."
 2. "Como estudiantes universitarios, entendemos que cada hora cuenta. Que un examen puede cambiar tu semestre. Que necesitas más que una mesa y un enchufe: necesitas un **refugio de concentración**."
-3. "Por eso creamos StudySpot: cápsulas de estudio diseñadas por estudiantes que vivieron el problema, para estudiantes que buscan la solución."
+3. "Por eso creamos FocusPod: cápsulas de estudio diseñadas por estudiantes que vivieron el problema, para estudiantes que buscan la solución."
 
-**Quote:** *"Cada estudiante merece un espacio donde su único límite sea su propia capacidad."* — Equipo Fundador, StudySpot
+**Quote:** *"Cada estudiante merece un espacio donde su único límite sea su propia capacidad."* — Equipo Fundador, FocusPod
 
 **Floating Card:** "Hecho en Temuco - Por estudiantes, para estudiantes." (icono `Heart`)
 
@@ -285,21 +285,21 @@ Pie de página con información de contacto y navegación.
 | **Brand** | Logo, descripción ("Tu santuario de concentración en Temuco..."), redes sociales |
 | **Navegación** | Inicio, Beneficios, Precios, Blog, Nosotros |
 | **Legal** | Términos de Servicio, Política de Privacidad, Política de Cancelación |
-| **Contacto** | Av. Alemania 0123, Temuco / hola@studyspot.cl / +56 9 1234 5678 |
+| **Contacto** | Av. Alemania 0123, Temuco / hola@focuspod.cl / +56 9 1234 5678 |
 
 **Redes Sociales:**
 - Instagram (icono `Instagram`)
 - TikTok (icono `Music`)
 
 **Footer Bottom:**
-- Copyright: "© 2025 StudySpot. Todos los derechos reservados."
+- Copyright: "© 2025 FocusPod. Todos los derechos reservados."
 - Botón: "Volver arriba" (icono `ArrowUp`)
 
 ---
 
 ## 📄 Licencia
 
-© 2025 StudySpot. Todos los derechos reservados.
+© 2025 FocusPod. Todos los derechos reservados.
 
 ---
 
