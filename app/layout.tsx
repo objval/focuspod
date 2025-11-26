@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { AccessibilityWidget } from "@/components/layout/accessibility-widget";
 import { QuickContact } from "@/components/layout/quick-contact";
 import { CookieConsent } from "@/components/layout/cookie-consent";
+import { QuickBooking } from "@/components/layout/quick-booking";
 import { ShowcaseMode } from "@/components/showcase-mode";
 import "./globals.css";
 
@@ -474,6 +475,7 @@ export default function RootLayout({
             <ScrollToTop />
             <AccessibilityWidget />
             <QuickContact />
+            <QuickBooking />
             <ShowcaseMode />
             <CookieConsent />
           </div>

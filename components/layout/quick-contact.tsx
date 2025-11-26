@@ -59,7 +59,7 @@ export function QuickContact() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "fixed bottom-6 right-20 z-40 h-12 w-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg group",
+          "fixed bottom-20 right-6 z-40 h-12 w-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg group",
           isOpen
             ? "bg-card border border-white/10 text-foreground rotate-0"
             : "bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40 hover:scale-110"
@@ -90,7 +90,7 @@ export function QuickContact() {
       {/* Contact Options */}
       <div
         className={cn(
-          "fixed bottom-20 right-20 z-40 flex flex-col gap-2 transition-all duration-300",
+          "fixed bottom-36 right-6 z-40 flex flex-col gap-2 transition-all duration-300",
           isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
