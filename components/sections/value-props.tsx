@@ -1,114 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { VolumeX, Wifi, MapPin, Zap, Shield, Clock, Sparkles } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { FloatingParticles } from "@/components/ui/effects/floating-particles";
+import { ReactiveOrb } from "@/components/ui/effects/reactive-orb";
+import { SectionHeader } from "@/components/ui/section-header";
+import { useMouseTracking } from "@/hooks/use-mouse-tracking";
+import { ANIMATION_PRESETS } from "@/lib/animation-variants";
 import { cn } from "@/lib/utils";
-
-// Floating particles component
-function FloatingParticles() {
-  const [particles, setParticles] = React.useState<Array<{
-    id: number;
-    size: number;
-    x: number;
-    y: number;
-    duration: number;
-    delay: number;
-    type: string;
-  }>>([]);
-
-  React.useEffect(() => {
-    setParticles(
-      Array.from({ length: 20 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 4 + 2,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        duration: Math.random() * 12 + 8,
-        delay: Math.random() * 5,
-        type: Math.random() > 0.7 ? "glow" : "normal",
-      }))
-    );
-  }, []);
-
-  if (particles.length === 0) return null;
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className={cn(
-            "absolute rounded-full",
-            particle.type === "glow" 
-              ? "bg-primary/30 shadow-lg shadow-primary/20" 
-              : "bg-primary/15"
-          )}
-          style={{
-            width: particle.size,
-            height: particle.size,
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-          }}
-          animate={{
-            y: [0, -25, 0],
-            opacity: [0.2, 0.7, 0.2],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Reactive orb component
-function ReactiveOrb({ 
-  baseX, 
-  baseY, 
-  size, 
-  color, 
-  mouseX, 
-  mouseY,
-}: { 
-  baseX: string; 
-  baseY: string; 
-  size: string; 
-  color: string;
-  mouseX: ReturnType<typeof useSpring>;
-  mouseY: ReturnType<typeof useSpring>;
-}) {
-  return (
-    <motion.div
-      className={cn("absolute rounded-full blur-3xl pointer-events-none", color)}
-      style={{
-        width: size,
-        height: size,
-        left: baseX,
-        top: baseY,
-        x: mouseX,
-        y: mouseY,
-      }}
-      animate={{
-        scale: [1, 1.1, 1],
-        opacity: [0.3, 0.5, 0.3],
-      }}
-      transition={{
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
 
 const features = [
   {
@@ -167,109 +69,74 @@ const features = [
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
+const { container: containerVariants, item: itemVariants } = ANIMATION_PRESETS.valueProps;
 
 export function ValueProps() {
-  const containerRef = React.useRef<HTMLElement>(null);
-  
-  // Mouse tracking for reactive orbs
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    mouseX.set((e.clientX - centerX) * 0.03);
-    mouseY.set((e.clientY - centerY) * 0.03);
-  };
+  const { containerRef, smoothMouseX, smoothMouseY, handleMouseMove } = useMouseTracking({
+    intensity: 0.03,
+    enableSmoothing: true,
+  });
 
   return (
     <section 
-      ref={containerRef}
+      ref={containerRef as React.RefObject<HTMLElement>}
       id="beneficios" 
       className="relative min-h-screen py-24 sm:py-32 overflow-hidden flex items-center"
       onMouseMove={handleMouseMove}
     >
-      {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-muted/20" />
       
-      {/* Floating Particles */}
-      <FloatingParticles />
+      <FloatingParticles
+        count={20}
+        durationMin={8}
+        durationRange={12}
+        enableGlow
+        enableXOffset={false}
+        enableScale
+        yRange={25}
+        opacityMax={0.7}
+        baseColor="bg-primary/15"
+        glowColor="bg-primary/30 shadow-lg shadow-primary/20"
+      />
       
-      {/* Reactive Orbs */}
       <ReactiveOrb 
-        baseX="10%" 
-        baseY="20%" 
+        positionX="10%" 
+        positionY="20%" 
         size="350px" 
-        color="bg-primary/10"
+        colorClass="bg-primary/10"
         mouseX={smoothMouseX}
         mouseY={smoothMouseY}
+        preSmoothed
       />
       <ReactiveOrb 
-        baseX="80%" 
-        baseY="60%" 
+        positionX="80%" 
+        positionY="60%" 
         size="300px" 
-        color="bg-secondary/15"
+        colorClass="bg-secondary/15"
         mouseX={smoothMouseX}
         mouseY={smoothMouseY}
+        preSmoothed
       />
       <ReactiveOrb 
-        baseX="50%" 
-        baseY="80%" 
+        positionX="50%" 
+        positionY="80%" 
         size="250px" 
-        color="bg-primary/8"
+        colorClass="bg-primary/8"
         mouseX={smoothMouseX}
         mouseY={smoothMouseY}
+        preSmoothed
       />
       
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <Badge variant="secondary" className="mb-4 gap-1">
-            <Sparkles className="h-3 w-3" />
-            Nuestros Beneficios
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            ¿Por qué elegir{" "}
-            <span className="text-primary">StudySpot</span>?
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Diseñamos cada detalle pensando en tu concentración y comodidad.
-          </p>
-        </motion.div>
+        <SectionHeader
+          icon={Sparkles}
+          badgeText="Nuestros Beneficios"
+          titlePrefix="¿Por qué elegir "
+          titleHighlight="StudySpot"
+          titleSuffix="?"
+          description="Diseñamos cada detalle pensando en tu concentración y comodidad."
+        />
 
-        {/* Features Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -280,16 +147,12 @@ export function ValueProps() {
           {features.map((feature, index) => (
             <motion.div key={index} variants={itemVariants}>
               <Card className="relative group h-full overflow-hidden border-border/50 bg-card/60 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1">
-                {/* Gradient Background on hover */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
-                
-                {/* Subtle glow on hover */}
                 <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
 
                 <CardContent className="relative p-6 sm:p-8">
-                  {/* Icon with enhanced styling */}
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -302,17 +165,14 @@ export function ValueProps() {
                     <feature.icon className="h-8 w-8" strokeWidth={1.5} />
                   </motion.div>
 
-                  {/* Title */}
                   <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
                     {feature.title}
                   </h3>
 
-                  {/* Description */}
                   <p className="text-muted-foreground leading-relaxed">
                     {feature.description}
                   </p>
                   
-                  {/* Bottom accent line */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </CardContent>
               </Card>
@@ -320,7 +180,6 @@ export function ValueProps() {
           ))}
         </motion.div>
         
-        {/* Bottom stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

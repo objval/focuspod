@@ -188,3 +188,44 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* Utilidades compartidas para secciones */
+@layer components {
+  /* Cards con efecto glass */
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-sm border-border/50;
+  }
+  
+  .glass-card-intense {
+    @apply bg-card/80 backdrop-blur-xl;
+  }
+  
+  /* Cards interactivas con hover */
+  .interactive-card {
+    @apply transition-all duration-300 hover:border-primary/30 
+           hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1;
+  }
+  
+  /* Gradientes de sección */
+  .section-gradient {
+    @apply bg-gradient-to-b from-muted/20 via-background to-muted/20;
+  }
+  
+  .section-gradient-alt {
+    @apply bg-gradient-to-b from-background via-muted/10 to-muted/20;
+  }
+  
+  /* Orbs decorativos */
+  .blur-orb {
+    @apply absolute rounded-full blur-3xl pointer-events-none;
+  }
+  
+  /* Contenedor de sección estándar */
+  .section-container {
+    @apply relative py-24 sm:py-32 overflow-hidden;
+  }
+  
+  .section-container-full {
+    @apply relative min-h-screen py-24 sm:py-32 overflow-hidden flex items-center;
+  }
+}

@@ -1,48 +1,74 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Quote, Heart, Users } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { FloatingParticles } from "@/components/ui/effects/floating-particles";
+import { ReactiveOrb } from "@/components/ui/effects/reactive-orb";
+import { SectionHeader } from "@/components/ui/section-header";
+import { useMouseTracking } from "@/hooks/use-mouse-tracking";
+import { slideInLeft, slideInRight } from "@/lib/animation-variants";
 
 export function AboutUs() {
+  const { containerRef, smoothMouseX, smoothMouseY, handleMouseMove } = useMouseTracking({
+    intensity: 0.03,
+    enableSmoothing: true,
+  });
+
   return (
-    <section id="nosotros" className="relative min-h-screen py-24 sm:py-32 overflow-hidden flex items-center">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-muted/30" />
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
+    <section 
+      ref={containerRef as React.RefObject<HTMLElement>}
+      id="nosotros" 
+      className="section-container-full"
+      onMouseMove={handleMouseMove}
+    >
+      <div className="absolute inset-0 section-gradient-alt" />
+      
+      <FloatingParticles
+        count={18}
+        durationMin={10}
+        durationRange={15}
+        enableGlow
+        glowProbability={0.25}
+        opacityMax={0.6}
+      />
+      
+      <ReactiveOrb 
+        positionX="85%" 
+        positionY="15%" 
+        size="350px" 
+        colorClass="bg-primary/8"
+        mouseX={smoothMouseX}
+        mouseY={smoothMouseY}
+        preSmoothed
+      />
+      <ReactiveOrb 
+        positionX="5%" 
+        positionY="70%" 
+        size="280px" 
+        colorClass="bg-secondary/12"
+        mouseX={smoothMouseX}
+        mouseY={smoothMouseY}
+        preSmoothed
+      />
       
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <Badge variant="secondary" className="mb-4">
-            <Users className="h-3 w-3 mr-1" />
-            Quiénes Somos
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            Conoce al equipo detrás de{" "}
-            <span className="text-primary">StudySpot</span>
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Estudiantes que entendieron el problema y crearon la solución.
-          </p>
-        </motion.div>
+        <SectionHeader
+          icon={Users}
+          badgeText="Quiénes Somos"
+          titlePrefix="Conoce al equipo detrás de "
+          titleHighlight="StudySpot"
+          description="Estudiantes que entendieron el problema y crearon la solución."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image Side */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={slideInLeft}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" as const }}
             className="relative"
           >
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
@@ -51,18 +77,18 @@ export function AboutUs() {
                 alt="Equipo StudySpot"
                 fill
                 className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
             </div>
 
-            {/* Floating Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="absolute -bottom-6 -right-6 sm:right-6 bg-card border border-border rounded-xl p-4 shadow-lg max-w-[200px]"
+              className="absolute -bottom-6 -right-6 sm:right-6 glass-card-intense border border-border rounded-xl p-4 shadow-lg max-w-[200px]"
             >
               <div className="flex items-center gap-2 text-primary mb-2">
                 <Heart className="h-5 w-5 fill-primary" />
@@ -73,17 +99,15 @@ export function AboutUs() {
               </p>
             </motion.div>
 
-            {/* Decorative Element */}
             <div className="absolute -z-10 -top-4 -left-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
             <div className="absolute -z-10 -bottom-4 -right-4 w-32 h-32 bg-secondary/30 rounded-full blur-2xl" />
           </motion.div>
 
-          {/* Content Side */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={slideInRight}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" as const }}
           >
             <div className="inline-flex items-center gap-2 text-primary font-medium mb-4">
               <span className="h-px w-8 bg-primary"></span>
@@ -112,7 +136,6 @@ export function AboutUs() {
               </p>
             </div>
 
-            {/* Quote */}
             <motion.blockquote
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

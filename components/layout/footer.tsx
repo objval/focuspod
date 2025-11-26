@@ -7,41 +7,12 @@ import {
   MapPin,
   Mail,
   Phone,
-  Instagram,
-  Music,
   ArrowUp,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-
-const footerLinks = {
-  navigation: [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Beneficios", href: "#beneficios" },
-    { label: "Precios", href: "#precios" },
-    { label: "Blog", href: "#blog" },
-    { label: "Nosotros", href: "#nosotros" },
-  ],
-  legal: [
-    { label: "Términos de Servicio", href: "#" },
-    { label: "Política de Privacidad", href: "#" },
-    { label: "Política de Cancelación", href: "#" },
-  ],
-};
-
-const socialLinks = [
-  {
-    label: "Instagram",
-    href: "https://instagram.com/studyspot",
-    icon: Instagram,
-  },
-  {
-    label: "TikTok",
-    href: "https://tiktok.com/@studyspot",
-    icon: Music,
-  },
-];
+import { FOOTER_LINKS, SOCIAL_LINKS, SITE_CONFIG } from "@/lib/constants";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -74,7 +45,7 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="flex items-center gap-3">
-              {socialLinks.map((social) => (
+              {SOCIAL_LINKS.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
@@ -100,7 +71,7 @@ export function Footer() {
           >
             <h3 className="font-semibold mb-4">Navegación</h3>
             <ul className="space-y-3">
-              {footerLinks.navigation.map((link) => (
+              {FOOTER_LINKS.navigation.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -122,7 +93,7 @@ export function Footer() {
           >
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
+              {FOOTER_LINKS.legal.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -147,27 +118,27 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm">
                 <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">
-                  Av. Alemania 0123
+                  {SITE_CONFIG.address}
                   <br />
-                  Temuco, Chile
+                  {SITE_CONFIG.location}, {SITE_CONFIG.country}
                 </span>
               </li>
               <li>
                 <a
-                  href="mailto:hola@studyspot.cl"
+                  href={`mailto:${SITE_CONFIG.email}`}
                   className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <Mail className="h-5 w-5 text-primary" />
-                  hola@studyspot.cl
+                  {SITE_CONFIG.email}
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+56912345678"
+                  href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`}
                   className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <Phone className="h-5 w-5 text-primary" />
-                  +56 9 1234 5678
+                  {SITE_CONFIG.phone}
                 </a>
               </li>
             </ul>

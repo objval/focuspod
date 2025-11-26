@@ -13,74 +13,9 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { FloatingParticles, PARTICLE_PRESETS } from "@/components/ui/effects/floating-particles";
 import { cn } from "@/lib/utils";
 
-// Enhanced floating particles component
-function FloatingParticles() {
-  const [particles, setParticles] = React.useState<Array<{
-    id: number;
-    size: number;
-    x: number;
-    y: number;
-    duration: number;
-    delay: number;
-    type: string;
-    xOffset: number;
-  }>>([]);
-
-  React.useEffect(() => {
-    setParticles(
-      Array.from({ length: 30 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 6 + 2,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        duration: Math.random() * 15 + 10,
-        delay: Math.random() * 5,
-        type: Math.random() > 0.7 ? "glow" : "normal",
-        xOffset: Math.random() * 20 - 10,
-      }))
-    );
-  }, []);
-
-  if (particles.length === 0) return null;
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className={cn(
-            "absolute rounded-full",
-            particle.type === "glow" 
-              ? "bg-primary/40 shadow-lg shadow-primary/30" 
-              : "bg-primary/20"
-          )}
-          style={{
-            width: particle.size,
-            height: particle.size,
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-          }}
-          animate={{
-            y: [0, -40, 0],
-            x: [0, particle.xOffset, 0],
-            opacity: [0.2, 0.9, 0.2],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Countdown timer component
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = React.useState({
     hours: 2,
@@ -134,7 +69,6 @@ function CountdownTimer() {
   );
 }
 
-// Magnetic button component
 function MagneticButton({ children, className, ...props }: React.ComponentProps<typeof Button>) {
   const ref = React.useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
@@ -169,7 +103,6 @@ function MagneticButton({ children, className, ...props }: React.ComponentProps<
   );
 }
 
-// Achievement badges
 const achievements = [
   { icon: Trophy, label: "+500 estudiantes", color: "text-yellow-500" },
   { icon: Zap, label: "4.9★ rating", color: "text-primary" },
@@ -186,13 +119,10 @@ export function CallToAction() {
 
   return (
     <section id="cta" className="relative min-h-screen py-24 sm:py-32 overflow-hidden flex items-center">
-      {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-muted/30 to-muted/30" />
       
-      {/* Floating Particles */}
-      <FloatingParticles />
+      <FloatingParticles {...PARTICLE_PRESETS.cta} />
       
-      {/* Interactive gradient orb that follows cursor intent */}
       <motion.div
         className="absolute w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl pointer-events-none"
         animate={{
@@ -219,9 +149,7 @@ export function CallToAction() {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div className="relative p-8 sm:p-12 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/50 shadow-2xl">
-            {/* Content */}
             <div className="relative text-center">
-                {/* Badge with pulse */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -238,7 +166,6 @@ export function CallToAction() {
                   Empieza hoy mismo
                 </motion.div>
 
-                {/* Heading */}
                 <h2 
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
                   onClick={handleEasterEgg}
@@ -248,7 +175,6 @@ export function CallToAction() {
                   <span className="text-foreground">comienza aquí</span>
                 </h2>
 
-                {/* Easter egg */}
                 {clickCount >= 5 && (
                   <motion.p
                     initial={{ opacity: 0, y: -10 }}
@@ -259,18 +185,15 @@ export function CallToAction() {
                   </motion.p>
                 )}
 
-                {/* Description */}
                 <p className="text-lg sm:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
                   Únete a cientos de estudiantes de Temuco que ya descubrieron el poder
                   de la concentración total.
                 </p>
 
-                {/* Countdown Timer */}
                 <div className="flex justify-center mb-8">
                   <CountdownTimer />
                 </div>
 
-                {/* Interactive CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
                   <MagneticButton
                     size="lg"
@@ -298,7 +221,6 @@ export function CallToAction() {
                   </Button>
                 </div>
 
-                {/* Achievement Badges */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -318,7 +240,6 @@ export function CallToAction() {
                   ))}
                 </motion.div>
 
-                {/* Social Proof Avatars */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}

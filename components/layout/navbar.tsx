@@ -15,15 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#beneficios", label: "Beneficios" },
-  { href: "#precios", label: "Precios" },
-  { href: "#testimonios", label: "Testimonios" },
-  { href: "#ubicacion", label: "Ubicación" },
-  { href: "#faq", label: "FAQ" },
-];
+import { NAV_LINKS } from "@/lib/constants";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -71,7 +63,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -125,7 +117,7 @@ export function Navbar() {
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4 mt-8">
-                  {navLinks.map((link) => (
+                  {NAV_LINKS.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
