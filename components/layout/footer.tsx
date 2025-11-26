@@ -35,7 +35,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Headphones className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">
-                Study<span className="text-primary">Spot</span>
+                Focus<span className="text-primary">Pod</span>
               </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
@@ -150,7 +150,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground text-center sm:text-left">
-            © {new Date().getFullYear()} StudySpot. Todos los derechos reservados.
+            © {new Date().getFullYear()} FocusPod. Todos los derechos reservados.
           </p>
 
           {/* Back to Top Button */}

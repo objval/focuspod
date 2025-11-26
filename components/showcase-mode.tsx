@@ -191,7 +191,7 @@ export function ShowcaseMode() {
 
   return (
     <>
-      {/* Floating Start Button (when not active) */}
+      {/* Floating Start Button (when not active) - Compact circle */}
       <AnimatePresence>
         {!isActive && (
           <motion.div
@@ -200,15 +200,20 @@ export function ShowcaseMode() {
             exit={{ opacity: 0, scale: 0.8 }}
             className="fixed bottom-6 left-6 z-40"
           >
-            <Button
+            <button
               onClick={startShowcase}
-              size="sm"
-              className="gap-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 hover:scale-105"
+              className={cn(
+                "h-12 w-12 flex items-center justify-center",
+                "bg-gradient-to-r from-primary to-primary/80",
+                "text-primary-foreground rounded-full",
+                "shadow-lg shadow-primary/30",
+                "hover:shadow-xl hover:shadow-primary/50 hover:scale-110",
+                "transition-all duration-300"
+              )}
+              aria-label="Modo Presentación"
             >
-              <Presentation className="h-4 w-4" />
-              <span className="hidden sm:inline">Modo Presentación</span>
-              <span className="sm:hidden">Demo</span>
-            </Button>
+              <Presentation className="h-5 w-5" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

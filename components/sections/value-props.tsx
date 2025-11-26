@@ -132,7 +132,7 @@ export function ValueProps() {
           icon={Sparkles}
           badgeText="Nuestros Beneficios"
           titlePrefix="¿Por qué elegir "
-          titleHighlight="StudySpot"
+          titleHighlight="FocusPod"
           titleSuffix="?"
           description="Diseñamos cada detalle pensando en tu concentración y comodidad."
         />

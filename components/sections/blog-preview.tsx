@@ -85,7 +85,7 @@ export function BlogPreview() {
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           titlePrefix="Blog "
-          titleHighlight="StudySpot"
+          titleHighlight="FocusPod"
           description="Tips, guías y recursos para potenciar tu estudio."
           flexRow
           marginBottom="mb-12"

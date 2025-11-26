@@ -72,24 +72,23 @@ export function QuickBooking() {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Button - Compact circle on all screens */}
       <button
         onClick={() => setIsOpen(true)}
         className={cn(
           "fixed z-40 group",
           "bottom-36 right-6",
-          "flex items-center gap-2 px-5 py-3",
+          "h-12 w-12 flex items-center justify-center",
           "bg-gradient-to-r from-primary via-primary to-primary/80",
-          "text-primary-foreground font-semibold text-sm",
+          "text-primary-foreground",
           "rounded-full shadow-lg shadow-primary/30",
-          "hover:shadow-xl hover:shadow-primary/40 hover:scale-105",
+          "hover:shadow-xl hover:shadow-primary/40 hover:scale-110",
           "transition-all duration-300",
           "border border-white/20"
         )}
+        aria-label="Reserva Rápida"
       >
-        <Sparkles className="h-4 w-4" />
-        <span>Reserva Rápida</span>
-        <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+        <Calendar className="h-5 w-5" />
       </button>
 
       {/* Booking Modal */}

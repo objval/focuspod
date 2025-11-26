@@ -48,7 +48,7 @@ export function QuickContact() {
       label: "Email",
       sublabel: SITE_CONFIG.email,
       icon: <Mail className="h-5 w-5" />,
-      href: `mailto:${SITE_CONFIG.email}?subject=Consulta sobre StudySpot`,
+      href: `mailto:${SITE_CONFIG.email}?subject=Consulta sobre FocusPod`,
       color: "bg-orange-500 hover:bg-orange-600",
     },
   ];

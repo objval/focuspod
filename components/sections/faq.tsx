@@ -103,7 +103,7 @@ const faqs = [
   {
     question: "¿No encuentras lo que buscas? ¡Contáctanos!",
     answer:
-      "Estamos aquí para ayudarte. Escríbenos por Instagram @studyspot.temuco, envíanos un correo a hola@studyspot.cl, o visítanos directamente en nuestra ubicación. ¡Responderemos todas tus dudas!",
+      "Estamos aquí para ayudarte. Escríbenos por Instagram @focuspod.temuco, envíanos un correo a hola@focuspod.cl, o visítanos directamente en nuestra ubicación. ¡Responderemos todas tus dudas!",
   },
 ];
 

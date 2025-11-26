@@ -29,7 +29,7 @@ const testimonials = [
     role: "Tesista UFRO - Ingeniería",
     initials: "SR",
     rating: 5,
-    text: "Mi tesis avanzó más en una semana usando StudySpot que en un mes estudiando en mi casa. El WiFi nunca falla y la iluminación es perfecta.",
+    text: "Mi tesis avanzó más en una semana usando FocusPod que en un mes estudiando en mi casa. El WiFi nunca falla y la iluminación es perfecta.",
     highlight: "Avancé más en una semana",
   },
   {

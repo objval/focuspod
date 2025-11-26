@@ -3,7 +3,7 @@ import { Instagram, Music } from "lucide-react";
 
 // Configuración del sitio
 export const SITE_CONFIG = {
-  name: "StudySpot",
+  name: "FocusPod",
   tagline: "Tu santuario de concentración",
   location: "Temuco",
   region: "Región de La Araucanía",
@@ -11,9 +11,9 @@ export const SITE_CONFIG = {
   address: "Av. Alemania 0123",
   price: "$2.500",
   currency: "CLP",
-  email: "hola@studyspot.cl",
+  email: "hola@focuspod.cl",
   phone: "+56 9 1234 5678",
-  instagram: "@studyspot.temuco",
+  instagram: "@focuspod.temuco",
 } as const;
 
 // Links de navegación con iconos
@@ -52,12 +52,12 @@ export interface SocialLink {
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: "Instagram",
-    href: "https://instagram.com/studyspot.temuco",
+    href: "https://instagram.com/focuspod.temuco",
     icon: Instagram,
   },
   {
     label: "TikTok",
-    href: "https://tiktok.com/@studyspot.temuco",
+    href: "https://tiktok.com/@focuspod.temuco",
     icon: Music,
   },
 ];

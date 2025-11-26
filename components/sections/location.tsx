@@ -72,7 +72,7 @@ export function Location() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ubicación StudySpot Temuco"
+                title="Ubicación FocusPod Temuco"
                 className="absolute inset-0"
               />
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 to-transparent" />

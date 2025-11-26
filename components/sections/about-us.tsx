@@ -59,7 +59,7 @@ export function AboutUs() {
           icon={Users}
           badgeText="Quiénes Somos"
           titlePrefix="Conoce al equipo detrás de "
-          titleHighlight="StudySpot"
+          titleHighlight="FocusPod"
           description="Estudiantes que entendieron el problema y crearon la solución."
         />
 
@@ -74,7 +74,7 @@ export function AboutUs() {
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-                alt="Equipo StudySpot"
+                alt="Equipo FocusPod"
                 fill
                 className="object-cover"
                 loading="lazy"
@@ -130,7 +130,7 @@ export function AboutUs() {
                 mesa y un enchufe: necesitas un <strong className="text-foreground">refugio de concentración</strong>.
               </p>
               <p>
-                Por eso creamos StudySpot: cápsulas de estudio diseñadas por
+                Por eso creamos FocusPod: cápsulas de estudio diseñadas por
                 estudiantes que vivieron el problema, para estudiantes que buscan
                 la solución.
               </p>

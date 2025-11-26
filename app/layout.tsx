@@ -30,8 +30,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "StudySpot | Cápsulas de Estudio Insonorizadas en Temuco",
-    template: "%s | StudySpot Temuco",
+    default: "FocusPod | Cápsulas de Estudio Insonorizadas en Temuco",
+    template: "%s | FocusPod Temuco",
   },
   description:
     "Tu santuario de concentración en Temuco. Cápsulas de estudio 100% insonorizadas con WiFi 5G dedicado, iluminación ajustable y reserva instantánea. A pasos de UFRO, UCT y U. Autónoma. Desde $2.500 CLP/hora. Abierto L-V 8:00-22:00.",
@@ -77,16 +77,16 @@ export const metadata: Metadata = {
   ],
 
   authors: [
-    { name: "StudySpot", url: "https://studyspot.cl" },
-    { name: "StudySpot Temuco" },
+    { name: "FocusPod", url: "https://focuspod.vercel.app" },
+    { name: "FocusPod Temuco" },
   ],
-  creator: "StudySpot Temuco",
-  publisher: "StudySpot",
+  creator: "FocusPod Temuco",
+  publisher: "FocusPod",
   generator: "Next.js",
-  applicationName: "StudySpot",
+  applicationName: "FocusPod",
   referrer: "origin-when-cross-origin",
 
-  metadataBase: new URL("https://studyspot.cl"),
+  metadataBase: new URL("https://focuspod.vercel.app"),
   alternates: {
     canonical: "/",
     languages: {
@@ -96,26 +96,26 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "StudySpot | Tu Santuario de Estudio en Temuco",
+    title: "FocusPod | Tu Santuario de Estudio en Temuco",
     description:
       "Cápsulas de estudio 100% insonorizadas en Temuco. WiFi 5G dedicado, iluminación ajustable, reserva instantánea. A pasos de UFRO, UCT y U. Autónoma. Desde $2.500 CLP/hora.",
     type: "website",
     locale: "es_CL",
-    url: "https://studyspot.cl",
-    siteName: "StudySpot Temuco",
+    url: "https://focuspod.vercel.app",
+    siteName: "FocusPod Temuco",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "StudySpot - Cápsulas de Estudio Insonorizadas en Temuco, Chile",
+        alt: "FocusPod - Cápsulas de Estudio Insonorizadas en Temuco, Chile",
         type: "image/png",
       },
       {
         url: "/og-image-square.png",
         width: 1200,
         height: 1200,
-        alt: "StudySpot Temuco - Logo",
+        alt: "FocusPod Temuco - Logo",
         type: "image/png",
       },
     ],
@@ -124,12 +124,12 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "StudySpot | Cápsulas de Estudio en Temuco",
+    title: "FocusPod | Cápsulas de Estudio en Temuco",
     description:
       "Tu santuario de concentración en Temuco. Cápsulas 100% insonorizadas con WiFi 5G. Reserva desde $2.500 CLP/hora. A pasos de UFRO y UCT.",
     images: ["/og-image.png"],
-    creator: "@studyspottemuco",
-    site: "@studyspottemuco",
+    creator: "@focuspodtemuco",
+    site: "@focuspodtemuco",
   },
 
   robots: {
@@ -162,7 +162,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "StudySpot",
+    title: "FocusPod",
   },
 
   verification: {
@@ -197,8 +197,8 @@ export const metadata: Metadata = {
     "target": "all",
     "HandheldFriendly": "true",
     "MobileOptimized": "320",
-    "instagram:site": "@studyspot.temuco",
-    "instagram:creator": "@studyspot.temuco",
+    "instagram:site": "@focuspod.temuco",
+    "instagram:creator": "@focuspod.temuco",
     "product:price:amount": "2500",
     "product:price:currency": "CLP",
     "business:hours:day": "monday,tuesday,wednesday,thursday,friday",
@@ -213,13 +213,13 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://studyspot.cl/#organization",
-      name: "StudySpot",
-      alternateName: "StudySpot Temuco",
-      url: "https://studyspot.cl",
+      "@id": "https://focuspod.vercel.app/#organization",
+      name: "FocusPod",
+      alternateName: "FocusPod Temuco",
+      url: "https://focuspod.vercel.app",
       logo: {
         "@type": "ImageObject",
-        url: "https://studyspot.cl/logo.png",
+        url: "https://focuspod.vercel.app/logo.png",
         width: 512,
         height: 512,
       },
@@ -230,28 +230,28 @@ const jsonLd = {
         name: "Temuco, Chile",
       },
       sameAs: [
-        "https://instagram.com/studyspot.temuco",
-        "https://tiktok.com/@studyspot",
+        "https://instagram.com/focuspod.temuco",
+        "https://tiktok.com/@focuspod",
       ],
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
-        email: "hola@studyspot.cl",
+        email: "hola@focuspod.cl",
         availableLanguage: ["Spanish"],
       },
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://studyspot.cl/#localbusiness",
-      name: "StudySpot Temuco",
-      alternateName: "StudySpot - Cápsulas de Estudio",
+      "@id": "https://focuspod.vercel.app/#localbusiness",
+      name: "FocusPod Temuco",
+      alternateName: "FocusPod - Cápsulas de Estudio",
       description:
         "Cápsulas de estudio 100% insonorizadas con WiFi 5G dedicado. Tu santuario de concentración en Temuco, a pasos de UFRO, UCT y U. Autónoma.",
-      url: "https://studyspot.cl",
+      url: "https://focuspod.vercel.app",
       telephone: "+56912345678",
-      email: "hola@studyspot.cl",
-      image: "https://studyspot.cl/og-image.png",
-      logo: "https://studyspot.cl/logo.png",
+      email: "hola@focuspod.cl",
+      image: "https://focuspod.vercel.app/og-image.png",
+      logo: "https://focuspod.vercel.app/logo.png",
       priceRange: "$$",
       currenciesAccepted: "CLP",
       paymentAccepted: "Cash, Credit Card, Debit Card, Bank Transfer",
@@ -300,7 +300,7 @@ const jsonLd = {
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Servicios StudySpot",
+        name: "Servicios FocusPod",
         itemListElement: [
           {
             "@type": "Offer",
